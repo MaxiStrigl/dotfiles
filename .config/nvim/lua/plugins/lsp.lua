@@ -17,7 +17,7 @@ return {
 		require("mason-lspconfig").setup({
 			ensure_installed = {
 				"lua_ls",
-        "clangd",
+				"clangd",
 				"tsserver",
 				"html",
 				"bashls",
@@ -25,21 +25,21 @@ return {
 				"jsonls",
 				"marksman",
 				"rust_analyzer",
-        "volar",
+				"volar",
 			},
 		})
 
 		local servers = {
 			bashls = {},
-      clangd = {},
+			clangd = {},
 			lua_ls = {},
-      tsserver = {},
-      html = {},
-      cssls = {},
-      dartls = {},
-      jsonls = {},
-      marksman = {},
-      volar = {},
+			tsserver = {},
+			html = {},
+			cssls = {},
+			dartls = {},
+			jsonls = {},
+			marksman = {},
+			volar = {},
 			rust_analyzer = {
 				cmd = {
 					"rustup",
@@ -48,7 +48,7 @@ return {
 					"rust_analyzer",
 				},
 			},
-      ocamllsp = {},
+			ocamllsp = {},
 		}
 
 		--cmp provides aditional capabilities
@@ -75,11 +75,14 @@ return {
 			border = "rounded",
 			sources = {
 				--formatting
+				formatting.google_java_format,
 				formatting.prettier,
 				formatting.stylua,
-        formatting.ocamlformat,
-        formatting.clang_format
-		}})
+				formatting.ocamlformat,
+				formatting.clang_format,
+			},
+			autostart = true,
+		})
 
 		--Borderd for LspInfo ui
 		require("lspconfig.ui.windows").default_options.border = "rounded"

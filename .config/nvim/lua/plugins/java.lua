@@ -1,5 +1,5 @@
 return {
-  "nvim-java/nvim-java",
+	"nvim-java/nvim-java",
 	dependencies = {
 		"nvim-java/lua-async-await",
 		"nvim-java/nvim-java-core",
@@ -18,8 +18,33 @@ return {
 			},
 		},
 	},
-  config = function()
-    require("java").setup()
-    require("lspconfig").jdtls.setup({})
-  end,
+	config = function()
+		require("java").setup()
+
+		local keybinds = require("user.keybinds").lsp_keybinds
+
+    local on_attach = function(_client, buffer_number)
+			keybinds(buffer_number)
+		end
+
+
+		require("lspconfig").jdtls.setup({
+			settings = {
+				java = {
+					format = {
+						enabled = false,
+					},
+				},
+			},
+      on_attach = on_attach,
+		})
+
+		local null_ls = require("null-ls")
+		null_ls.setup({
+			sources = {
+				null_ls.builtins.formatting.google_java_format
+			},
+			autostart = true,
+		})
+	end,
 }
