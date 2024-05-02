@@ -107,4 +107,14 @@ vim.keymap.set('v', '<leader>y', '"+y')
 --Undotree keybinds
 vim.keymap.set('n', '<leader>u', require('undotree').toggle, { noremap = true, silent = true })
 
+--Trouble
+vim.keymap.set("n", "<leader>tt", function() require("trouble").toggle() end, {desc = "Toggle Trouble"})
+vim.keymap.set("n", "<leader>tw", function() require("trouble").toggle("workspace_diagnostics") end, {desc = "Workspace Diagnostice"})
+vim.keymap.set("n", "<leader>td", function() require("trouble").toggle("document_diagnostics") end, {desc = "Document Diagnostics"})
+vim.keymap.set("n", "<leader>tq", function() require("trouble").toggle("quickfix") end, {desc = "Quickfix"})
+vim.keymap.set("n", "<leader>tl", function() require("trouble").toggle("loclist") end, {desc = "Loclist"})
+vim.keymap.set("n", "<leader>tg", function() require("trouble").toggle("lsp_references") end, {desc = "Lsp References"})
+
+
+
 return M
