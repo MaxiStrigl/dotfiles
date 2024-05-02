@@ -104,4 +104,7 @@ vim.keymap.set('n', '<leader>gb', ':GitBlameToggle<CR>', {desc = 'Toggle Git Bla
 
 vim.keymap.set('v', '<leader>y', '"+y')
 
+--Undotree keybinds
+vim.keymap.set('n', '<leader>u', require('undotree').toggle, { noremap = true, silent = true })
+
 return M
