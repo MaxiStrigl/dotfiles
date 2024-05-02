@@ -1,6 +1,5 @@
 local harpoon_ui = require("harpoon.ui")
 local harpoon_mark = require("harpoon.mark")
-
 local M = {}
 --- Telescope
 vim.keymap.set("n", "<leader><space>", require("telescope.builtin").find_files, {desc = "Find Files"})
@@ -108,7 +107,6 @@ vim.keymap.set('v', '<leader>y', '"+y')
 vim.keymap.set('n', '<leader>u', require('undotree').toggle, { noremap = true, silent = true })
 
 --Trouble
-vim.keymap.set("n", "<leader>tt", function() require("trouble").toggle() end, {desc = "Toggle Trouble"})
 vim.keymap.set("n", "<leader>tw", function() require("trouble").toggle("workspace_diagnostics") end, {desc = "Workspace Diagnostice"})
 vim.keymap.set("n", "<leader>td", function() require("trouble").toggle("document_diagnostics") end, {desc = "Document Diagnostics"})
 vim.keymap.set("n", "<leader>tq", function() require("trouble").toggle("quickfix") end, {desc = "Quickfix"})
@@ -116,5 +114,8 @@ vim.keymap.set("n", "<leader>tl", function() require("trouble").toggle("loclist"
 vim.keymap.set("n", "<leader>tg", function() require("trouble").toggle("lsp_references") end, {desc = "Lsp References"})
 
 
+--ToDo comments
+vim.keymap.set("n", "<leader>ft", ':TodoTelescope<CR>', {desc = 'Find ToDos'})
+vim.keymap.set("n", "<leader>tt", ':TodoTrouble<CR>', {desc = 'List ToDos'})
 
 return M
