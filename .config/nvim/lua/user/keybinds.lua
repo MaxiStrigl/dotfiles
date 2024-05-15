@@ -1,7 +1,8 @@
-local harpoon_ui = require("harpoon.ui")
-local harpoon_mark = require("harpoon.mark")
+--local harpoon_ui = require("harpoon.ui")
+--local harpoon_mark = require("harpoon.mark")
 local M = {}
 --- Telescope
+--[[
 vim.keymap.set("n", "<leader><space>", require("telescope.builtin").find_files, {desc = "Find Files"})
 vim.keymap.set("n", "<leader>f/", require("telescope.builtin").live_grep, {desc = "Live Grep"})
 vim.keymap.set("n", "<leader>fr", require("telescope.builtin").oldfiles, {desc = "Find recently opened files"})
@@ -25,7 +26,7 @@ end,
 
 --- Oil
 vim.keymap.set("n", "<leader>e", require("oil").toggle_float, {desc = "Filesystem"})
-
+]]--
 
 --- LSP
 M.lsp_keybinds = function(buffer_number)
@@ -35,6 +36,7 @@ M.lsp_keybinds = function(buffer_number)
   vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, { desc = " Format Document ", buffer = buffer_number})
 end
 
+--[[
 --- DAP
     vim.keymap.set("n", "<Leader>q", ":lua require'dapui'.close()<CR>", {desc = "close DAP UI"})
 
@@ -43,7 +45,7 @@ end
 		vim.keymap.set("n", "<Leader>dx", ":DapTerminate<CR>", {desc = "Terminate Debug"})
 		vim.keymap.set("n", "<Leader>do", ":DapStepOver<CR>", {desc = "Step Over"})
 
-
+    ]]--
 --Save, Quit & Savequit with leader keymap
 vim.keymap.set('n', "<leader>w", ":wa<CR>", { desc = "save"})
 vim.keymap.set('n', "<leader>z", ":wqa<CR>", { desc = "save and quit neovim"})
@@ -51,15 +53,17 @@ vim.keymap.set('n', "<leader>z", ":wqa<CR>", { desc = "save and quit neovim"})
 --Map jj to <ESC>
 vim.keymap.set('i', "jj", "<ESC>", { desc = "escape"})
 
+--[[
 --Map <H to _>
   vim.keymap.set('n', "H", "_", {desc = "move to first none space character"})
 
 --Map <L to $
 vim.keymap.set('n', "L", "$", {desc = "move to last character in line"})
-
+]]--
 --clear search highlights
 vim.keymap.set('n', "<leader>no", ":noh<CR>", {desc = "Clear search highlights"})
 
+--[[
 --Harpoon keybinds
 vim.keymap.set('n', "<leader>ho", function()
   harpoon_ui.toggle_quick_menu()
@@ -101,8 +105,10 @@ end, {desc = "Go to harpoon mark 5"})
 vim.keymap.set('n', '<leader>gl', ':LazyGit<CR>', {desc = 'Open LazyGit'})
 vim.keymap.set('n', '<leader>gb', ':GitBlameToggle<CR>', {desc = 'Toggle Git Blame'})
 
+]]--
 vim.keymap.set('v', '<leader>y', '"+y')
 
+--[[
 --Undotree keybinds
 vim.keymap.set('n', '<leader>u', require('undotree').toggle, { noremap = true, silent = true })
 
@@ -117,5 +123,6 @@ vim.keymap.set("n", "<leader>tg", function() require("trouble").toggle("lsp_refe
 --ToDo comments
 vim.keymap.set("n", "<leader>ft", ':TodoTelescope<CR>', {desc = 'Find ToDos'})
 vim.keymap.set("n", "<leader>tt", ':TodoTrouble<CR>', {desc = 'List ToDos'})
+]]--
 
 return M
