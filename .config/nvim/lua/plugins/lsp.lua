@@ -21,7 +21,6 @@ return {
         lua_ls = {},
         rust_analyzer = {},
         jsonls = {},
-        jdtls = { manual_install = true },
         ocamllsp = {},
         yamlls = {},
       }
@@ -50,10 +49,6 @@ return {
       end
 
       for name, config in pairs(servers) do
-        if config == true then
-          config = {}
-        end
-
         require("lspconfig")[name].setup({
           capabilities = default_capabilities,
           on_attach = on_attach,
