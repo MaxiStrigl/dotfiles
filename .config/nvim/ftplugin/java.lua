@@ -1,4 +1,5 @@
 local jdtls = require('jdtls')
+local home = os.getenv("HOME")
 local jdtls_dap = require('jdtls.dap')
 
 
@@ -25,6 +26,11 @@ local config = {
     java = {
       signatureHelp = { enabled = true },
       contentProvider = { preferred = 'fernflower' },
+      project = {
+        referencedLibraries = {
+          home .. '/.gradle/caches/modules-2/files-2.1/junit/junit/4.13.2/**/*.jar',
+        }
+      }
       -- Other settings
     }
   },
@@ -48,6 +54,9 @@ vim.opt.shiftwidth = 4
 
 
 vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Documentation" })
-vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, { desc = " Documentation " })
+vim.keymap.set("n", "<leader>k", vim.lsp.buf.signature_help, { desc = " Documentation " })
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = " Code Action " })
 vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, { desc = " Format Document " })
+
+
+vim.keymap.set("n", "<leader>dg", require("jdtls.tests").generate, { desc = "Generate Tests" })

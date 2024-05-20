@@ -1,5 +1,5 @@
---local harpoon_ui = require("harpoon.ui")
---local harpoon_mark = require("harpoon.mark")
+local harpoon_ui = require("harpoon.ui")
+local harpoon_mark = require("harpoon.mark")
 local M = {}
 --- Telescope
 vim.keymap.set("n", "<leader><space>", require("telescope.builtin").find_files, { desc = "Find Files" })
@@ -27,7 +27,6 @@ vim.keymap.set("n", "<leader>cs", function()
 
 
 --- Oil
-vim.keymap.set("n", "<leader>e", require("oil").toggle_float, { desc = "Filesystem" })
 
 
 --- LSP
@@ -54,18 +53,12 @@ vim.keymap.set('n', "<leader>z", ":wqa<CR>", { desc = "save and quit neovim" })
 --Map jj to <ESC>
 vim.keymap.set('i', "jj", "<ESC>", { desc = "escape" })
 
---[[
---Map <H to _>
-  vim.keymap.set('n', "H", "_", {desc = "move to first none space character"})
+--Map ff to <ESC>la
+vim.keymap.set('i', "ff", "<ESC>la")
 
---Map <L to $
-vim.keymap.set('n', "L", "$", {desc = "move to last character in line"})
-]]
-   --
 --clear search highlights
 vim.keymap.set('n', "<leader>no", ":noh<CR>", { desc = "Clear search highlights" })
 
---[[
 --Harpoon keybinds
 vim.keymap.set('n', "<leader>ho", function()
   harpoon_ui.toggle_quick_menu()
@@ -107,15 +100,10 @@ end, {desc = "Go to harpoon mark 5"})
 vim.keymap.set('n', '<leader>gl', ':LazyGit<CR>', {desc = 'Open LazyGit'})
 vim.keymap.set('n', '<leader>gb', ':GitBlameToggle<CR>', {desc = 'Toggle Git Blame'})
 
-]]
-   --
 vim.keymap.set('v', '<leader>y', '"+y')
 
---[[
 --Undotree keybinds
 vim.keymap.set('n', '<leader>u', require('undotree').toggle, { noremap = true, silent = true })
-]]
-   --
 
 --Trouble
 vim.keymap.set("n", "<leader>dw", function() require("trouble").toggle("workspace_diagnostics") end,
