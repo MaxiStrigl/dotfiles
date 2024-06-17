@@ -14,9 +14,10 @@ return {
         border = "rounded",
         sources = {
           --formatting
-          --formatting.google_java_format,
+          formatting.google_java_format,
           --formatting.prettier,
           formatting.stylua,
+          formatting.black
           --formatting.ocamlformat,
           -- formatting.clang_format,
         },

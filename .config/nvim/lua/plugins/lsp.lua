@@ -23,6 +23,12 @@ return {
         jsonls = {},
         ocamllsp = {},
         yamlls = {},
+        pyright = {
+          disableOrganizeImports = true,
+          disableLanguageServices = false,
+          typeCheckingMode = "basic",
+          reportArgumentType = "none",
+        }
       }
 
       local servers_to_install = vim.tbl_filter(function(key)
