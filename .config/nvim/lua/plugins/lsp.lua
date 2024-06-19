@@ -18,6 +18,7 @@ return {
       local servers = {
         bashls = {},
         clangd = {},
+        cssls = {},
         lua_ls = {},
         rust_analyzer = {},
         jsonls = {},
@@ -28,7 +29,8 @@ return {
           disableLanguageServices = false,
           typeCheckingMode = "basic",
           reportArgumentType = "none",
-        }
+        },
+        tsserver = {},
       }
 
       local servers_to_install = vim.tbl_filter(function(key)
