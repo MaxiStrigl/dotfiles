@@ -1,8 +1,9 @@
 .config/*
-.config/hypr/display.conf
 
 !.config/nvim
 !.config/hypr
 !.config/ags
 !.config/tmux
 !.config/kitty
+
+.config/hypr/display.conf
