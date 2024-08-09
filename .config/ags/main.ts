@@ -1,26 +1,41 @@
-import Bar from 'widget/Bar/bar'
-import Gtk from "gi://Gtk?version=3.0"
-import Gdk from "gi://Gdk"
-
-
-function forAllMonitors(widget: (monitor: number) => Gtk.Window) {
-    const n :number = Gdk.Display.get_default()?.get_n_monitors() || 1
-    return range(n, 0).flatMap(widget)
-}
-
-function range(length: number, start = 1) {
-    return Array.from({ length }, (_, i) => i + start)
-}
-
-
-const scss = "./style.scss"
-const css = `/tmp/my-style.css`
-Utils.exec(`sassc ${scss} ${css}`)
+import "lib/session"
+import "style/style"
+import init from "lib/init"
+import options from "options"
+import Bar from "widget/bar/Bar"
+import Launcher from "widget/launcher/Launcher"
+import NotificationPopups from "widget/notifications/NotificationPopups"
+import OSD from "widget/osd/OSD"
+import Overview from "widget/overview/Overview"
+import PowerMenu from "widget/powermenu/PowerMenu"
+import ScreenCorners from "widget/bar/ScreenCorners"
+import SettingsDialog from "widget/settings/SettingsDialog"
+import Verification from "widget/powermenu/Verification"
+import { forMonitors } from "lib/utils"
+import { setupQuickSettings } from "widget/quicksettings/QuickSettings"
+import { setupDateMenu } from "widget/datemenu/DateMenu"
 
 App.config({
-    style: css,
-    windows: () =>  
-    [
-      ...forAllMonitors(Bar),
+    onConfigParsed: () => {
+        setupQuickSettings()
+        setupDateMenu()
+        init()
+    },
+    closeWindowDelay: {
+        "launcher": options.transition.value,
+        "overview": options.transition.value,
+        "quicksettings": options.transition.value,
+        "datemenu": options.transition.value,
+    },
+    windows: () => [
+        ...forMonitors(Bar),
+        ...forMonitors(NotificationPopups),
+        ...forMonitors(ScreenCorners),
+        ...forMonitors(OSD),
+        Launcher(),
+        Overview(),
+        PowerMenu(),
+        SettingsDialog(),
+        Verification(),
     ],
 })
