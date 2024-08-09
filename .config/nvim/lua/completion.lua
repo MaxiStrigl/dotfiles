@@ -50,11 +50,18 @@ cmp.setup({
 
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
+    { name = 'luasnip', max_item_count = 3 },
     { name = 'buffer',  max_item_count = 5 },
     { name = 'path',    max_item_count = 3 },
-    { name = 'luasnip', max_item_count = 3 }
+  }),
+
+---@diagnostic disable-next-line: missing-fields
+  formatting = {
+    format = lspkind.cmp_format({
+      maxwidth = 50,
+      ellipsis_char = "...",
+    })
   }
-  )
 })
 --
 

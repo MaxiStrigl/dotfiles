@@ -2,6 +2,8 @@
 vim.opt.nu = true
 vim.opt.rnu = true
 
+vim.opt.conceallevel = 1
+
 -- Set Tabs to 2 spaces 
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2

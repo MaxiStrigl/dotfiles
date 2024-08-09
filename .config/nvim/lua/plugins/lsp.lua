@@ -1,6 +1,7 @@
 return {
   {
     "neovim/nvim-lspconfig",
+    event = { "BufReadPre", "BufNewFile"},
 
     dependencies = {
       "folke/neodev.nvim",
@@ -17,18 +18,17 @@ return {
 
       local servers = {
         bashls = {},
-        clangd = {},
+        clangd = {
+          filetypes = { "c", "cpp", "objc", "objcpp", "cuda" } -- exclude "proto"
+        },
         cssls = {},
+        dockerls = {},
         lua_ls = {},
         rust_analyzer = {},
         jsonls = {},
         ocamllsp = {},
         yamlls = {},
         pyright = {
-          disableOrganizeImports = true,
-          disableLanguageServices = false,
-          typeCheckingMode = "basic",
-          reportArgumentType = "none",
         },
         tsserver = {},
       }
@@ -56,13 +56,20 @@ return {
         keybinds(buffer_number)
       end
 
+      --for name, config in pairs(servers) do
+      --  require("lspconfig")[name].setup({
+      --    capabilities = default_capabilities,
+      --    on_attach = on_attach,
+      --    settings = config.cmd,
+      --  })
+      --  --Borderd for LspInfo ui
+      --end
+
       for name, config in pairs(servers) do
-        require("lspconfig")[name].setup({
+        lspconfig[name].setup(vim.tbl_extend("force", {
           capabilities = default_capabilities,
           on_attach = on_attach,
-          settings = config.cmd,
-        })
-        --Borderd for LspInfo ui
+        }, config))
       end
 
       require("lspconfig.ui.windows").default_options.border = "rounded"

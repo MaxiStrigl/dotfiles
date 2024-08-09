@@ -46,15 +46,11 @@ vim.keymap.set("n", "<Leader>dx", ":DapTerminate<CR>", { desc = "Terminate Debug
 vim.keymap.set("n", "<Leader>do", ":DapStepOver<CR>", { desc = "Step Over" })
 vim.keymap.set("n", "<Leader>di", ":DapStepInto<CR>", { desc = "Step Over" })
 
---Save, Quit & Savequit with leader keymap
-vim.keymap.set('n', "<leader>w", ":wa<CR>", { desc = "save" })
-vim.keymap.set('n', "<leader>z", ":wqa<CR>", { desc = "save and quit neovim" })
-
 --Map jj to <ESC>
 vim.keymap.set('i', "jj", "<ESC>", { desc = "escape" })
 
---Map ff to <ESC>la
-vim.keymap.set('i', "ff", "<ESC>la")
+--Map FF to <ESC>la
+vim.keymap.set('i', "FF", "<ESC>la")
 
 --clear search highlights
 vim.keymap.set('n', "<leader>no", ":noh<CR>", { desc = "Clear search highlights" })
@@ -102,13 +98,15 @@ vim.keymap.set('n', '<leader>gb', ':GitBlameToggle<CR>', {desc = 'Toggle Git Bla
 
 vim.keymap.set('v', '<leader>y', '"+y')
 
+-- Goto Definition
+vim.keymap.set("n", "<leader>gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
+vim.keymap.set("n", "<leader>gD", "<cmd>lua vim.lsp.buf.declaration()<CR>")
+
 --Undotree keybinds
 vim.keymap.set('n', '<leader>u', require('undotree').toggle, { noremap = true, silent = true })
 
 --Trouble
-vim.keymap.set("n", "<leader>dw", function() require("trouble").toggle("workspace_diagnostics") end,
-  { desc = "Workspace Diagnostice" })
-vim.keymap.set("n", "<leader>dd", function() require("trouble").toggle("document_diagnostics") end,
+vim.keymap.set("n", "<leader>dd", function() require("trouble").toggle("diagnostics") end,
   { desc = "Document Diagnostics" })
 vim.keymap.set("n", "<leader>dq", function() require("trouble").toggle("quickfix") end, { desc = "Quickfix" })
 
@@ -117,4 +115,21 @@ vim.keymap.set("n", "<leader>dq", function() require("trouble").toggle("quickfix
 vim.keymap.set("n", "<leader>ft", ':TodoTelescope<CR>', { desc = 'Find ToDos' })
 vim.keymap.set("n", "<leader>dt", ':TodoTrouble<CR>', { desc = 'List ToDos' })
 
+--Obsidian 
+vim.keymap.set("n", "<leader>oo", ':!cd ~/Projects/obsidianVault/New<CR>')
+
+vim.keymap.set("n", "<leader>on", ":ObsidianTemplate note<cr> :lua vim.cmd([[1,/^\\S/s/^\\n\\{1,}//]])<CR>")
+-- Must have cursor on title - removes date
+vim.keymap.set("n", "<leader>of", ":s/\\(# \\)[^_]*_/\\1/ | s/-/ /g<cr>")
+
+vim.keymap.set("n", "<leader>os", ":Telescope find_files search_dirs={\"/Users/alex/library/Mobile\\ Documents/iCloud~md~obsidian/Documents/ZazenCodes/notes\"}<cr>")
+vim.keymap.set("n", "<leader>oz", ":Telescope live_grep search_dirs={\"/Users/alex/library/Mobile\\ Documents/iCloud~md~obsidian/Documents/ZazenCodes/notes\"}<cr>")
+
+
+-- move file in current buffer to zettelkasten folder
+vim.keymap.set("n", "<leader>ok", ":silent! !mv '%:p' $HOME/Projects/obsidianVault/New/zettelkasten/<cr>:bd<cr>")
+vim.keymap.set("n", "<leader>odd", ":silent! !rm '%:p'<cr>:bd<cr>")
+
 return M
+
+-- delete file in current buffer
