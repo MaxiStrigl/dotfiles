@@ -1,6 +1,3 @@
-# Obsidian
-alias oo='cd $HOME/Projects/obsidianVault/New'
-alias or='vim $HOME/Projects/obsidianVault/New/*.md'
 
 export PATH=$PATH:/home/maxi/Projects/Spotparse/
 
@@ -46,6 +43,7 @@ bindkey '^p' history-search-backward
 #Aliases
 alias cd='z'
 alias v='nvim'
+alias c='clear'
 alias python='python3'
 alias cat='bat'
 alias t='tmux'
@@ -53,6 +51,11 @@ alias ls='lsd'
 alias diff='delta'
 alias src='source ~/.zshrc'
 # alias ls='ls --color'
+
+# Obsidian
+alias oo='cd $HOME/Projects/obsidianVault/New'
+alias or='vim $HOME/Projects/obsidianVault/New/*.md'
+
 
 #Shell integration
 
