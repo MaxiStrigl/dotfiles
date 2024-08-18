@@ -1,7 +1,7 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    event = { "BufReadPre", "BufNewFile"},
+    event = { "BufReadPre", "BufNewFile" },
 
     dependencies = {
       "folke/neodev.nvim",
@@ -28,8 +28,7 @@ return {
         jsonls = {},
         ocamllsp = {},
         yamlls = {},
-        pyright = {
-        },
+        pyright = {},
         tsserver = {},
       }
 
@@ -51,6 +50,9 @@ return {
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       local default_capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+
+      -- setup gdscript
+      lspconfig.gdscript.setup(default_capabilities)
 
       local on_attach = function(_client, buffer_number)
         keybinds(buffer_number)
