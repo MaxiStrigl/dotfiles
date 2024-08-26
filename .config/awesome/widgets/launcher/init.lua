@@ -7,37 +7,50 @@ local beautiful = require("beautiful")
 local list_widget = require("widgets.launcher.list")
 local search_handler = require("widgets.launcher.search_handler")
 
+local dpi = require("beautiful.xresources").apply_dpi
+
 local last_input = ""
 
 local prompt_label = wibox.widget {
   {
-    markup = "<span foreground='#aaaaaa'> </span>",
-    font = "JetBrainsMono NF, ExtraLight 16",
-    fg = "#6C7086",
+    image = gears.color.recolor_image("/home/maxi/Downloads/search-svgrepo-com.svg", "#67687A"),
+    forced_width = 27,
+    forced_height = 27,
     align = "center",
     valign = "center",
-    widget = wibox.widget.textbox,
+    widget = wibox.widget.imagebox
   },
-  right = 3,
-  left = 0,
-  widget = wibox.container.margin
+  align = "center",
+  valign = "center",
+
+  widget = wibox.container.place
 }
 
 local my_prompt = awful.widget.prompt()
 
+local centered_prompt = wibox.widget {
+  {
+    my_prompt,
+    top = 3,  -- Adjust this value to fine-tune the vertical alignment
+    widget = wibox.container.margin
+  },
+  valign = "center",
+  widget = wibox.container.place
+}
 
 local search_bar_layout = wibox.widget {
   prompt_label,
-  my_prompt,
+  centered_prompt,
+  spacing = dpi(6),
   layout = wibox.layout.fixed.horizontal,
 }
 
 local rounded_rect = function(cr, width, height)
-  return gears.shape.partially_rounded_rect(cr, width, height, true, true, true, true, 10)
+  return gears.shape.partially_rounded_rect(cr, width, height, true, true, true, true, 15)
 end
 
 local top_rounded_rect = function(cr, width, height)
-  return gears.shape.partially_rounded_rect(cr, width, height, true, true, false, false, 10)
+  return gears.shape.partially_rounded_rect(cr, width, height, true, true, false, false, 15)
 end
 
 
@@ -50,7 +63,9 @@ local screen_center_wibox = wibox {
   bg = beautiful.bg_normal,
   rad = 100,
   shape = rounded_rect,
-  widget = wibox.container.margin(search_bar_layout, 20, 20, 10, 10)
+  border_width = 2,
+  border_color = "#515151",
+  widget = wibox.container.margin(search_bar_layout, dpi(10), dpi(10), dpi(5), dpi(4))
 }
 
 local screen_geom = screen_center_wibox.screen.geometry
@@ -65,15 +80,17 @@ local function show_wibox_with_prompt()
   screen_center_wibox.visible = true
 
   awful.prompt.run {
-    font                 = "Poppins SemiBold 14",
+    font                 = "Poppins 12",
     textbox              = my_prompt.widget,
     exe_callback         = function(input)
       screen_center_wibox.visible = false
+      screen_center_wibox.shape = rounded_rect
       result_list_widget:run()
       result_list_widget:toggle(false)
     end,
     done_callback        = function()
       screen_center_wibox.visible = false
+      screen_center_wibox.shape = rounded_rect
       result_list_widget:toggle(false)
     end,
 
@@ -96,7 +113,7 @@ local function show_wibox_with_prompt()
         last_input = input
         local current_text = input
         if current_text and #current_text > 0 then
-          result_list_widget:toggle(true)
+          -- result_list_widget:toggle(true)
           local app_list = search_handler(current_text)
 
           result_list_widget:reset()

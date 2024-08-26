@@ -6,5 +6,6 @@
 !.config/tmux
 !.config/kitty
 !.config/ohmyposh
+!.config/awesome
 
-.config/hypr/display.conf
+.config/hypr/laptop.conf
