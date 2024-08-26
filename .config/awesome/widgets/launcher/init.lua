@@ -13,7 +13,7 @@ local last_input = ""
 
 local prompt_label = wibox.widget {
   {
-    image = gears.color.recolor_image("/home/maxi/Downloads/search-svgrepo-com.svg", "#67687A"),
+    image = gears.color.recolor_image(beautiful.search_icon, "#67687A"),
     forced_width = 27,
     forced_height = 27,
     align = "center",

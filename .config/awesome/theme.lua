@@ -8,6 +8,7 @@ local dpi = xresources.apply_dpi
 
 local gfs = require("gears.filesystem")
 local themes_path = gfs.get_themes_dir()
+local config_dir = gfs.get_configuration_dir()
 
 local theme = {}
 
@@ -128,7 +129,7 @@ theme.layout_cornerne = themes_path.."default/layouts/cornernew.png"
 theme.layout_cornersw = themes_path.."default/layouts/cornersww.png"
 theme.layout_cornerse = themes_path.."default/layouts/cornersew.png"
 
-theme.search_icon = "$HOME/Downloads/search-svgrepo-com.svg"
+theme.search_icon = config_dir .. "assets/search_icon.svg"
 
 -- Icons
 theme.arch_icon = "/home/maxi/Downloads/icons8-arch-linux-48.png"
