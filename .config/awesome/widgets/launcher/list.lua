@@ -10,7 +10,7 @@ local suggestions = {}
 
 local selected = 1
 
-function suggestions_widget.new(screen_center_wibox)
+function suggestions_widget.new()
   -- layout for the list of search results
   local list_layout = wibox.widget {
     -- spacing = dpi(12),
@@ -30,6 +30,8 @@ function suggestions_widget.new(screen_center_wibox)
     visible = false,
     bg = beautiful.bg_normal,
     shape = bottom_rounded_rect,
+    border_width = 1,
+    border_color = "#515151",
     -- widget = wibox.container.margin(list_layout, 20, 20, 10, 10)
     widget = wibox.container.margin(list_layout, 0, 0, 0, 0)
   }
@@ -42,12 +44,12 @@ function suggestions_widget.new(screen_center_wibox)
     selected = 1
   end
 
-  -- position of the list_widget
-  local prompt_geom = screen_center_wibox:geometry()
-  list_widget:geometry({
-    x = prompt_geom.x,
-    y = prompt_geom.y + screen_center_wibox.height
-  })
+  -- -- position of the list_widget
+  -- local prompt_geom = screen_center_wibox:geometry()
+  -- list_widget:geometry({
+  --   x = prompt_geom.x,
+  --   y = prompt_geom.y + screen_center_wibox.height
+  -- })
 
   -- hide or show the list_widget
   function list_widget:toggle(visible)

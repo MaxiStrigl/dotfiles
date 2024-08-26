@@ -12,6 +12,8 @@ local dpi = require("beautiful.xresources").apply_dpi
 local last_input = ""
 local placeholder_text = "Type your command here..."
 
+local result_list_widget = list_widget.new()
+
 local prompt_label = wibox.widget {
   {
     image = gears.color.recolor_image(beautiful.search_icon, "#67687A"),
@@ -30,7 +32,8 @@ local prompt_label = wibox.widget {
 local my_prompt = awful.widget.prompt()
 
 local placeholder_widget = wibox.widget {
-  markup = '<span color="#888888">' .. placeholder_text .. '</span>',   -- You can customize the color
+  markup = '<span color="#888888">' .. placeholder_text .. '</span>', -- You can customize the color
+  font = beautiful.prompt_font,
   widget = wibox.widget.textbox,
 }
 
@@ -63,6 +66,11 @@ local top_rounded_rect = function(cr, width, height)
   return gears.shape.partially_rounded_rect(cr, width, height, true, true, false, false, 15)
 end
 
+local launcher_widget = wibox.widget {
+  search_bar_layout,
+  -- result_list_widget,
+  layout = wibox.layout.fixed.vertical
+}
 
 local screen_center_wibox = wibox {
   width = 800,
@@ -75,7 +83,8 @@ local screen_center_wibox = wibox {
   shape = rounded_rect,
   border_width = 1,
   border_color = "#515151",
-  widget = wibox.container.margin(search_bar_layout, dpi(10), dpi(10), dpi(5), dpi(4))
+  -- widget = wibox.container.margin(search_bar_layout, dpi(10), dpi(10), dpi(5), dpi(5)),
+  widget = launcher_widget
 }
 
 local screen_geom = screen_center_wibox.screen.geometry
@@ -84,13 +93,11 @@ screen_center_wibox:geometry({
   y = screen_geom.height * 0.2,
 })
 
-local result_list_widget = list_widget.new(screen_center_wibox)
-
 local function show_wibox_with_prompt()
   screen_center_wibox.visible = true
 
   awful.prompt.run {
-    font                 = "Poppins 12",
+    font                 = beautiful.prompt_font,
     textbox              = my_prompt.widget,
     exe_callback         = function(input)
       screen_center_wibox.visible = false
