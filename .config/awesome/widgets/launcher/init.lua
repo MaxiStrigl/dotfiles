@@ -10,6 +10,7 @@ local search_handler = require("widgets.launcher.search_handler")
 local dpi = require("beautiful.xresources").apply_dpi
 
 local last_input = ""
+local placeholder_text = "Type your command here..."
 
 local prompt_label = wibox.widget {
   {
@@ -28,10 +29,19 @@ local prompt_label = wibox.widget {
 
 local my_prompt = awful.widget.prompt()
 
+local placeholder_widget = wibox.widget {
+  markup = '<span color="#888888">' .. placeholder_text .. '</span>',   -- You can customize the color
+  widget = wibox.widget.textbox,
+}
+
 local centered_prompt = wibox.widget {
   {
-    my_prompt,
-    top = 3,  -- Adjust this value to fine-tune the vertical alignment
+    {
+      my_prompt,
+      placeholder_widget,
+      layout = wibox.layout.stack,
+    },
+    top = 3, -- Adjust this value to fine-tune the vertical alignment
     widget = wibox.container.margin
   },
   valign = "center",
@@ -63,7 +73,7 @@ local screen_center_wibox = wibox {
   bg = beautiful.bg_normal,
   rad = 100,
   shape = rounded_rect,
-  border_width = 2,
+  border_width = 1,
   border_color = "#515151",
   widget = wibox.container.margin(search_bar_layout, dpi(10), dpi(10), dpi(5), dpi(4))
 }
@@ -105,15 +115,17 @@ local function show_wibox_with_prompt()
     changed_callback     = function(input)
       if input ~= "" then
         screen_center_wibox.shape = top_rounded_rect
+        placeholder_widget.visible = false
       else
         screen_center_wibox.shape = rounded_rect
+        placeholder_widget.visible = true
       end
 
       if input ~= last_input then
         last_input = input
         local current_text = input
         if current_text and #current_text > 0 then
-          -- result_list_widget:toggle(true)
+          result_list_widget:toggle(true)
           local app_list = search_handler(current_text)
 
           result_list_widget:reset()
