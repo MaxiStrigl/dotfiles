@@ -12,7 +12,7 @@ local dpi = require("beautiful.xresources").apply_dpi
 local last_input = ""
 local placeholder_text = "Type your command here..."
 
-local result_list_widget = list_widget.new()
+local test = require("widgets.launcher.test")
 
 local prompt_label = wibox.widget {
   {
@@ -44,7 +44,7 @@ local centered_prompt = wibox.widget {
       placeholder_widget,
       layout = wibox.layout.stack,
     },
-    top = 3, -- Adjust this value to fine-tune the vertical alignment
+    top = dpi(3),
     widget = wibox.container.margin
   },
   valign = "center",
@@ -52,10 +52,16 @@ local centered_prompt = wibox.widget {
 }
 
 local search_bar_layout = wibox.widget {
-  prompt_label,
-  centered_prompt,
-  spacing = dpi(6),
-  layout = wibox.layout.fixed.horizontal,
+  {
+    prompt_label,
+    centered_prompt,
+    forced_height = 55,
+    forced_width = 800,
+    spacing = dpi(6),
+    layout = wibox.layout.fixed.horizontal,
+  },
+  left = dpi(10),
+  widget = wibox.container.margin
 }
 
 local rounded_rect = function(cr, width, height)
@@ -68,8 +74,10 @@ end
 
 local launcher_widget = wibox.widget {
   search_bar_layout,
-  -- result_list_widget,
-  layout = wibox.layout.fixed.vertical
+  test,
+  spacing = 6,
+  -- list_widget,
+  layout = wibox.layout.fixed.vertical,
 }
 
 local screen_center_wibox = wibox {
@@ -102,20 +110,20 @@ local function show_wibox_with_prompt()
     exe_callback         = function(input)
       screen_center_wibox.visible = false
       screen_center_wibox.shape = rounded_rect
-      result_list_widget:run()
-      result_list_widget:toggle(false)
+      list_widget:run()
+      list_widget:toggle(false)
     end,
     done_callback        = function()
       screen_center_wibox.visible = false
       screen_center_wibox.shape = rounded_rect
-      result_list_widget:toggle(false)
+      list_widget:toggle(false)
     end,
 
     keyreleased_callback = function(_, key, _)
       if key == "Up" then
-        result_list_widget:navigate_up()
+        list_widget:navigate_up()
       elseif key == "Down" then
-        result_list_widget:navigate_down()
+        list_widget:navigate_down()
       end
     end,
 
@@ -132,18 +140,18 @@ local function show_wibox_with_prompt()
         last_input = input
         local current_text = input
         if current_text and #current_text > 0 then
-          result_list_widget:toggle(true)
+          list_widget:toggle(true)
           local app_list = search_handler(current_text)
 
-          result_list_widget:reset()
+          list_widget:reset()
 
           if app_list and #app_list > 0 then
-            result_list_widget:set_elements(app_list)
+            list_widget:set_elements(app_list)
           else
             naughty.notify({ text = "No apps found." })
           end
 
-          result_list_widget:emit_signal("widget::redraw_needed")
+          list_widget:emit_signal("widget::redraw_needed")
         end
       end
     end
