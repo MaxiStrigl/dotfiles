@@ -12,8 +12,6 @@ local dpi = require("beautiful.xresources").apply_dpi
 local last_input = ""
 local placeholder_text = "Type your command here..."
 
-local test = require("widgets.launcher.test")
-
 local prompt_label = wibox.widget {
   {
     image = gears.color.recolor_image(beautiful.search_icon, "#67687A"),
@@ -68,16 +66,23 @@ local rounded_rect = function(cr, width, height)
   return gears.shape.partially_rounded_rect(cr, width, height, true, true, true, true, 15)
 end
 
-local top_rounded_rect = function(cr, width, height)
-  return gears.shape.partially_rounded_rect(cr, width, height, true, true, false, false, 15)
-end
-
 local launcher_widget = wibox.widget {
-  search_bar_layout,
-  test,
-  spacing = 6,
-  -- list_widget,
-  layout = wibox.layout.fixed.vertical,
+  {
+    search_bar_layout,
+    {
+      list_widget,
+      top = 0,
+      left = 10,
+      right = 10,
+      bottom = 10,
+      widget = wibox.container.margin,
+    },
+    spacing = 0,
+    layout = wibox.layout.fixed.vertical,
+  },
+  forced_height = 55,
+  bg = beautiful.bg_normal,
+  widget = wibox.container.background,
 }
 
 local screen_center_wibox = wibox {
@@ -107,16 +112,16 @@ local function show_wibox_with_prompt()
   awful.prompt.run {
     font                 = beautiful.prompt_font,
     textbox              = my_prompt.widget,
-    exe_callback         = function(input)
+    exe_callback         = function(_)
       screen_center_wibox.visible = false
-      screen_center_wibox.shape = rounded_rect
+      screen_center_wibox.height = 55
+      placeholder_widget.visible = true
       list_widget:run()
-      list_widget:toggle(false)
     end,
     done_callback        = function()
       screen_center_wibox.visible = false
-      screen_center_wibox.shape = rounded_rect
-      list_widget:toggle(false)
+      screen_center_wibox.height = 55
+      placeholder_widget.visible = true
     end,
 
     keyreleased_callback = function(_, key, _)
@@ -129,10 +134,10 @@ local function show_wibox_with_prompt()
 
     changed_callback     = function(input)
       if input ~= "" then
-        screen_center_wibox.shape = top_rounded_rect
         placeholder_widget.visible = false
+        screen_center_wibox.height = 500
       else
-        screen_center_wibox.shape = rounded_rect
+        screen_center_wibox.height = 55
         placeholder_widget.visible = true
       end
 
@@ -140,7 +145,6 @@ local function show_wibox_with_prompt()
         last_input = input
         local current_text = input
         if current_text and #current_text > 0 then
-          list_widget:toggle(true)
           local app_list = search_handler(current_text)
 
           list_widget:reset()
