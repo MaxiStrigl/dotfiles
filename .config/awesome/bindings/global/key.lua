@@ -188,7 +188,7 @@ globalkeys = gears.table.join(globalkeys,
 
 
 
-for i = 1, 4 do
+for i = 1, 9 do
   globalkeys = gears.table.join(globalkeys,
     -- View tag only.
     awful.key({ mod.super }, "#" .. i + 9,

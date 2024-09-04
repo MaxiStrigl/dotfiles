@@ -24,6 +24,7 @@ local separator = wibox.widget {
 -- Given a list of elements generate the list
 function list_widget:set_elements(list)
   suggestions = list
+  selected = 1
   list_widget:reset()
 
   list_widget:add(separator)
