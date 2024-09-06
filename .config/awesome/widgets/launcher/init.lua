@@ -141,6 +141,7 @@ local function show_wibox_with_prompt()
         placeholder_widget.visible = true
       end
 
+
       if input ~= last_input then
         last_input = input
         local current_text = input
