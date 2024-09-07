@@ -166,7 +166,6 @@ end
 awesome.connect_signal("launcher::toggle", function()
   if screen_center_wibox.visible then
     screen_center_wibox.visible = false
-    result_list_widget:toggle(false)
   else
     show_wibox_with_prompt()
   end
