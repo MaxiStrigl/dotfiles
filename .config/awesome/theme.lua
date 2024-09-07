@@ -130,10 +130,13 @@ theme.layout_cornersw = themes_path.."default/layouts/cornersww.png"
 theme.layout_cornerse = themes_path.."default/layouts/cornersew.png"
 
 theme.search_icon = config_dir .. "assets/search_icon.svg"
+theme.corner = config_dir .. "assets/topbar_croner.svg"
 
 -- Icons
-theme.arch_icon = "/home/maxi/Downloads/icons8-arch-linux-48.png"
+theme.arch_icon = "/home/maxi/dotfiles/.config/awesome/assets/arch.svg"
 
+theme.left_corner = "/home/maxi/dotfiles/.config/awesome/assets/topbar_corner.svg"
+theme.right_corner = "/home/maxi/dotfiles/.config/awesome/assets/topbar_corner_right.svg"
 
 
 
