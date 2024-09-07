@@ -58,43 +58,43 @@ vim.keymap.set('n', "<leader>no", ":noh<CR>", { desc = "Clear search highlights"
 --Harpoon keybinds
 vim.keymap.set('n', "<leader>ho", function()
   harpoon_ui.toggle_quick_menu()
-end, {desc = "Toggle Harpoon Menu"})
+end, { desc = "Toggle Harpoon Menu" })
 
 vim.keymap.set('n', "<leader>ha", function()
   harpoon_mark.add_file()
-end, {desc = "Add file to harpoon"})
+end, { desc = "Add file to harpoon" })
 
 vim.keymap.set('n', "<leader>hr", function()
   harpoon_mark.remove_file()
-end, {desc = "Remove file from harpoon"})
+end, { desc = "Remove file from harpoon" })
 
 vim.keymap.set('n', "<leader>hc", function()
   harpoon_mark.clear_all()
-end, {desc = "Clear all harpoon marks"})
+end, { desc = "Clear all harpoon marks" })
 
 vim.keymap.set('n', "<leader>1", function()
   harpoon_ui.nav_file(1)
-end, {desc = "Go to harpoon mark 1"})
+end, { desc = "Go to harpoon mark 1" })
 
 vim.keymap.set('n', "<leader>2", function()
   harpoon_ui.nav_file(2)
-end, {desc = "Go to harpoon mark 2"})
+end, { desc = "Go to harpoon mark 2" })
 
 vim.keymap.set('n', "<leader>3", function()
   harpoon_ui.nav_file(3)
-end, {desc = "Go to harpoon mark 3"})
+end, { desc = "Go to harpoon mark 3" })
 
 vim.keymap.set('n', "<leader>4", function()
   harpoon_ui.nav_file(4)
-end, {desc = "Go to harpoon mark 4"})
+end, { desc = "Go to harpoon mark 4" })
 
 vim.keymap.set('n', "<leader>5", function()
   harpoon_ui.nav_file(5)
-end, {desc = "Go to harpoon mark 5"})
+end, { desc = "Go to harpoon mark 5" })
 
 --Git keybinds
-vim.keymap.set('n', '<leader>gl', ':LazyGit<CR>', {desc = 'Open LazyGit'})
-vim.keymap.set('n', '<leader>gb', ':GitBlameToggle<CR>', {desc = 'Toggle Git Blame'})
+vim.keymap.set('n', '<leader>gl', ':LazyGit<CR>', { desc = 'Open LazyGit' })
+vim.keymap.set('n', '<leader>gb', ':GitBlameToggle<CR>', { desc = 'Toggle Git Blame' })
 
 vim.keymap.set('v', '<leader>y', '"+y')
 
@@ -115,15 +115,31 @@ vim.keymap.set("n", "<leader>dq", function() require("trouble").toggle("quickfix
 vim.keymap.set("n", "<leader>ft", ':TodoTelescope<CR>', { desc = 'Find ToDos' })
 vim.keymap.set("n", "<leader>dt", ':TodoTrouble<CR>', { desc = 'List ToDos' })
 
---Obsidian 
+--Obsidian
 vim.keymap.set("n", "<leader>oo", ':!cd ~/Projects/obsidianVault/New<CR>')
 
 vim.keymap.set("n", "<leader>on", ":ObsidianTemplate note<cr> :lua vim.cmd([[1,/^\\S/s/^\\n\\{1,}//]])<CR>")
 -- Must have cursor on title - removes date
 vim.keymap.set("n", "<leader>of", ":s/\\(# \\)[^_]*_/\\1/ | s/-/ /g<cr>")
 
-vim.keymap.set("n", "<leader>os", ":Telescope find_files search_dirs={\"/Users/alex/library/Mobile\\ Documents/iCloud~md~obsidian/Documents/ZazenCodes/notes\"}<cr>")
-vim.keymap.set("n", "<leader>oz", ":Telescope live_grep search_dirs={\"/Users/alex/library/Mobile\\ Documents/iCloud~md~obsidian/Documents/ZazenCodes/notes\"}<cr>")
+local function insert_template(template_path)
+  local file = io.open(template_path, "r")
+  if file then
+    local content = file:read("*a")
+    file:close()
+    -- Insert the content into the current buffer at the cursor position
+    vim.api.nvim_put(vim.split(content, '\n'), 'l', true, true)
+  else
+    print("Template not found: " .. template_path)
+  end
+end
+
+vim.keymap.set("n", "<leader>otv", function()
+  insert_template('/home/maxi/Projects/obsidianVault/New/templates/Vorlesung.md')
+end)
+
+-- vim.keymap.set("n", "<leader>os", ":Telescope find_files search_dirs={\"/Users/alex/library/Mobile\\ Documents/iCloud~md~obsidian/Documents/ZazenCodes/notes\"}<cr>")
+-- vim.keymap.set("n", "<leader>oz", ":Telescope live_grep search_dirs={\"/Users/alex/library/Mobile\\ Documents/iCloud~md~obsidian/Documents/ZazenCodes/notes\"}<cr>")
 
 
 -- move file in current buffer to zettelkasten folder
