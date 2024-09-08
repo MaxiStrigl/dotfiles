@@ -1,6 +1,5 @@
 local awful = require("awful")
 local gears = require("gears")
-local naughty = require("naughty")
 
 local set_wallpaper = function()
   local hour = os.date("*t").hour
@@ -12,7 +11,7 @@ local set_wallpaper = function()
   elseif hour >= 18 and hour < 22 then
     awful.spawn.with_shell("feh --bg-scale ~/dotfiles/wallpapers/evening.jpg")
   else
-    awful.spawn.with_shell("feh --bg-scale ~/dotfiles/wallpapers/day.jpg")
+    awful.spawn.with_shell("feh --bg-scale ~/dotfiles/wallpapers/night.jpg")
   end
 end
 
