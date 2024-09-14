@@ -10,6 +10,13 @@ return {
       "williamboman/mason-lspconfig.nvim",
     },
 
+    init_options = {
+      userLanguages = {
+        eelixir = "html-eex",
+        eruby = "erb",
+        rust = "html",
+      },
+    },
     config = function()
       local lspconfig = require('lspconfig')
       local keybinds = require("user.keybinds").lsp_keybinds
@@ -29,7 +36,6 @@ return {
         ocamllsp = {},
         yamlls = {},
         pyright = {},
-        tsserver = {},
       }
 
       local servers_to_install = vim.tbl_filter(function(key)
