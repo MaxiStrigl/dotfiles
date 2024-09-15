@@ -1,3 +1,4 @@
+if [ "$TMUX" = "" ]; then tmux; fi
 
 export PATH=$PATH:/home/maxi/Projects/Spotparse/
 
@@ -91,3 +92,5 @@ unalias zi
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
+
+
