@@ -29,7 +29,7 @@ require("rules")
 -- init widgets
 require("widgets.topbar")
 require("widgets.launcher")
-
+require("widgets.dashboard")
 
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
