@@ -134,8 +134,11 @@ local function insert_template(template_path)
   end
 end
 
-vim.keymap.set("n", "<leader>otv", function()
+vim.keymap.set("n", "<leader>otl", function()
   insert_template('/home/maxi/Projects/obsidianVault/New/templates/Vorlesung.md')
+end)
+vim.keymap.set("n", "<leader>otp", function()
+  insert_template('/home/maxi/Projects/obsidianVault/New/templates/Übung.md')
 end)
 
 -- vim.keymap.set("n", "<leader>os", ":Telescope find_files search_dirs={\"/Users/alex/library/Mobile\\ Documents/iCloud~md~obsidian/Documents/ZazenCodes/notes\"}<cr>")
