@@ -58,8 +58,8 @@ alias src='source ~/.zshrc'
 
 # Obsidian
 alias oo='cd $HOME/Projects/obsidianVault/New'
-alias or='vim $HOME/Projects/obsidianVault/New/*.md'
-
+alias or='nvim $HOME/Projects/obsidianVault/New/inbox/*.md'
+alias on='bash $HOME/Projects/obsidianVault/scripts/on'
 
 #Shell integration
 
