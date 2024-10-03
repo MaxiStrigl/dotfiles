@@ -58,8 +58,16 @@ cmp.setup({
 ---@diagnostic disable-next-line: missing-fields
   formatting = {
     format = lspkind.cmp_format({
+      with_text = true,
       maxwidth = 50,
-      ellipsis_char = "...",
+      -- ellipsis_char = "...",
+      before = function(entry, vim_item)
+        local m = vim_item.menu and vim_item.menu or ""
+        if #m > 20 then
+          vim_item.menu = string.sub(m, 1, 20) .. "..."
+        end
+        return vim_item
+      end
     })
   }
 })
