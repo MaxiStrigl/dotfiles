@@ -30,12 +30,14 @@ return {
         },
         cssls = {},
         dockerls = {},
+        gradle_ls = {},
         lua_ls = {},
         rust_analyzer = {},
         jsonls = {},
         ocamllsp = {},
         yamlls = {},
         pyright = {},
+        pbls = {},
       }
 
       local servers_to_install = vim.tbl_filter(function(key)
