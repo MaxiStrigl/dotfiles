@@ -2,6 +2,8 @@ if [ "$TMUX" = "" ]; then tmux; fi
 
 export PATH=$PATH:/home/maxi/Projects/Spotparse/
 
++setopt HIST_IGNORE_SPACE
+
 #Set the directory to store zinit and it's plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
@@ -49,6 +51,7 @@ alias python='python3'
 alias cat='bat'
 alias t='tmux'
 alias ls='lsd'
+alias lg='lazygit'
 alias diff='delta'
 alias src='source ~/.zshrc'
 # alias ls='ls --color'
