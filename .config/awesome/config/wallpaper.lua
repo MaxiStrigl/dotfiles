@@ -61,7 +61,7 @@ end
 local wallpaper_timer = gears.timer({ timeout = get_next_timeout() })
 wallpaper_timer:connect_signal("timeout", function()
   set_wallpaper()
-  wallpaper_timer.timeout = get_next_timeout()
+  wallpaper_timer.timeout = 300
   wallpaper_timer:again()
 end)
 
