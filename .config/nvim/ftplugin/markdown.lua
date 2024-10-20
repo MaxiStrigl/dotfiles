@@ -10,6 +10,7 @@ local function insert_template(template_path)
   end
 end
 
+--Obsidian
 vim.keymap.set("n", "<leader>oo", ':!cd ~/Projects/obsidianVault/New<CR>')
 
 vim.keymap.set("n", "<leader>on", ":ObsidianTemplate note<cr> :lua vim.cmd([[1,/^\\S/s/^\\n\\{1,}//]])<CR>")
