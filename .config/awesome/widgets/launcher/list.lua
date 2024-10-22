@@ -73,25 +73,28 @@ function list_widget:set_elements(list)
 end
 
 function list_widget:navigate_down()
-  list_widget.children[selected].shape_border_width = 0
-  selected = selected + 1
+  -- Remove border from the currently selected item
+  list_widget.children[selected + 1].shape_border_width = 0
 
-  if selected > #list_widget.children then
+  -- Update selected index
+  selected = selected + 1
+  if selected > #suggestions then
     selected = 1
   end
 
-  list_widget.children[selected].shape_border_width = 2
+  list_widget.children[selected + 1].shape_border_width = 2
+
 end
 
 function list_widget:navigate_up()
-  list_widget.children[selected].shape_border_width = 0
-  selected = selected - 1
+  list_widget.children[selected + 1].shape_border_width = 0
 
+  selected = selected - 1
   if selected <= 0 then
-    selected = #list_widget.children
+    selected = #suggestions
   end
 
-  list_widget.children[selected].shape_border_width = 2
+  list_widget.children[selected + 1].shape_border_width = 2
 end
 
 function list_widget:run()
