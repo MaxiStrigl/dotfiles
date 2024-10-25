@@ -2,7 +2,7 @@ if [ "$TMUX" = "" ]; then tmux; fi
 
 export PATH=$PATH:/home/maxi/Projects/Spotparse/
 
-+setopt HIST_IGNORE_SPACE
+setopt HIST_IGNORE_SPACE
 
 #Set the directory to store zinit and it's plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -62,6 +62,16 @@ alias or='nvim $HOME/Projects/obsidianVault/New/inbox/*.md'
 alias on='bash $HOME/Projects/obsidianVault/scripts/on'
 
 #Shell integration
+
+# Custom Commands
+st() {
+  echo "Battery Status:"
+  acpi
+  echo -e "\nCurrent Date and Time:"
+  date
+  echo -e "\nNetwork Connection Status:"
+  nmcli connection show --active
+}
 
 #History
 HISTSIZE=5000
