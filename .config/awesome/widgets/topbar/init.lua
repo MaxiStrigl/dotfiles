@@ -6,7 +6,7 @@ local dpi = require("beautiful.xresources").apply_dpi
 
 local color = beautiful.bg_normal
 
-local type = 1
+local type = 0
 
 local widget = function(inner_widget)
   return wibox.widget {
