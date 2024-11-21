@@ -7,7 +7,7 @@ return {
   config = function()
     require('render-markdown').setup({
       latex = {
-        enabled = true,
+        enabled = false,
         converter = 'latex2text',
         highlight = 'RenderMarkdownMath',
         top_pad = 0,

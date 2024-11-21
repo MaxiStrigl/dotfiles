@@ -32,12 +32,18 @@ return {
         dockerls = {},
         gradle_ls = {},
         lua_ls = {},
-        rust_analyzer = {},
+        rust_analyzer = {
+          diagnostics =  {
+             refreshSupport = false,
+          }
+        },
         jsonls = {},
-        ocamllsp = {},
+        -- ocamllsp = {},
         yamlls = {},
         pyright = {},
         pbls = {},
+        tailwindcss = {},
+        ts_ls = {},
       }
 
       local servers_to_install = vim.tbl_filter(function(key)
