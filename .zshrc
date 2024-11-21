@@ -1,8 +1,15 @@
-if [ "$TMUX" = "" ]; then tmux; fi
+if [ -z "$TMUX" ] && ! tmux ls &>/dev/null; then
+  tmux
+fi
+
+
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export MANROFFOPT="-c"
 
 export PATH=$PATH:/home/maxi/Projects/Spotparse/
 
 setopt HIST_IGNORE_SPACE
+
 
 #Set the directory to store zinit and it's plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -27,6 +34,7 @@ zinit light Aloxaf/fzf-tab
 zinit snippet OMZP::git
 zinit snippet OMZP::sudo
 zinit snippet OMZP::archlinux
+zinit snippet OMZP::tldr
 
 #Load completions
 autoload -Uz compinit && compinit
@@ -37,6 +45,7 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 
 eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/custom.toml)"
+eval $(thefuck --alias)
 
 #Keybinds
 bindkey '^f' autosuggest-accept
@@ -107,3 +116,12 @@ eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
 
 
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+st
+
+eval $(thefuck --alias)
