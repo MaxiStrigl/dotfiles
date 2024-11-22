@@ -20,4 +20,7 @@ require("lazy").setup({
 	require("plugins.lsp"),
 	require("plugins.completion"),
 	require("plugins.formatting"),
+	require("plugins.gitsigns"),
+	require("plugins.lazygit"),
+	require("plugins.misc"),
 })
