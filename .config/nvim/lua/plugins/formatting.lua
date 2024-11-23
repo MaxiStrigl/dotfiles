@@ -18,16 +18,21 @@ return {
 				"stylua", -- lua formatter
 				"eslint_d", -- ts/js linter
 				"shfmt", -- shell formatter
-				"checkmake", -- linter for Makefiles
+				"checkmake", -- linter for makefiles
+				"ruff", -- litner for python
+				"mypy", -- static analyisis for python
 			},
 			automatic_installation = true,
 		})
 
 		local sources = {
 			diagnostics.checkmake,
+			diagnostics.mypy,
 			formatting.prettier.with({ filetypes = { "html", "json", "yaml", "markdown" } }),
 			formatting.stylua,
 			formatting.shfmt.with({ args = { "-i", "4" } }),
+			require("none-ls.formatting.ruff").with({ extra_args = { "--extend-select", "I" } }),
+			require("none-ls.formatting.ruff_format"),
 		}
 
 		local augrpoup = vim.api.nvim_create_augroup("LspFormatting", {})
@@ -36,6 +41,7 @@ return {
 			border = "rounded",
 			sources = sources,
 			autostart = true,
+			debug = true,
 			on_attach = function(client, bufnr)
 				vim.api.nvim_clear_autocmds({ group = augrpoup, buffer = bufnr })
 				vim.api.nvim_create_autocmd("BufWritePre", {

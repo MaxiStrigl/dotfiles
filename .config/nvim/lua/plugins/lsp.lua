@@ -21,7 +21,7 @@ return {
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 
 			-- Useful status updates for LSP.
-			{ "j-hui/fidget.nvim",       opts = {} },
+			{ "j-hui/fidget.nvim", opts = {} },
 
 			-- Allows extra capabilities provided by nvim-cmp
 			"hrsh7th/cmp-nvim-lsp",
@@ -144,15 +144,32 @@ return {
 							-- diagnostics = { disable = { 'missing-fields' } },
 						},
 					},
-					rust_analyzer = {
-						diagnostics = {
-							refreshSupport = false,
+				},
+				ruff = {},
+				pylsp = {
+					settings = {
+						pylsp = {
+							plugins = {
+								pyflakes = { enabled = false },
+								pycodestyle = { enabled = false },
+								autopep8 = { enabled = false },
+								yapf = { enabled = false },
+								mccabe = { enabled = false },
+								pylsp_mypy = { enabled = false },
+								pylsp_black = { enabled = false },
+								pylsp_isort = { enabled = false },
+							},
 						},
 					},
-					sqlls = {},
-					tailwindcss = {},
-					ts_ls = {},
 				},
+				rust_analyzer = {
+					diagnostics = {
+						refreshSupport = false,
+					},
+				},
+				sqlls = {},
+				tailwindcss = {},
+				ts_ls = {},
 			}
 
 			-- Ensure the servers and tools above are installed
