@@ -130,6 +130,7 @@ return {
 				cssls = {},
 				dockerls = {},
 				gradle_ls = {},
+				jdtls = {},
 				jsonls = {},
 				lua_ls = {
 					-- cmd = {...},
