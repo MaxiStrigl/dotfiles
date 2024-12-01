@@ -2,8 +2,8 @@
 
 return {
 	{ "christoomey/vim-tmux-navigator" }, -- Navigate between tmux and nvim with tmux binds
-	{ "tpope/vim-fugitive" },          -- Another Git integration for vim
-	{ "tpope/vim-rhubarb" },           -- Github integration for fugitive
+	{ "tpope/vim-fugitive" }, -- Another Git integration for vim
+	{ "tpope/vim-rhubarb" }, -- Github integration for fugitive
 	{ "ThePrimeagen/harpoon" },
 
 	{
@@ -22,6 +22,12 @@ return {
 		-- Highlight todo, hack, warning, etc in code
 		"folke/todo-comments.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = {},
+	},
+	{
+		-- Show indentation
+		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
 		opts = {},
 	},
 }

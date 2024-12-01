@@ -146,22 +146,35 @@ return {
 					},
 				},
 				ruff = {},
-				pylsp = {
+				pyright = {
 					settings = {
-						pylsp = {
-							plugins = {
-								pyflakes = { enabled = false },
-								pycodestyle = { enabled = false },
-								autopep8 = { enabled = false },
-								yapf = { enabled = false },
-								mccabe = { enabled = false },
-								pylsp_mypy = { enabled = false },
-								pylsp_black = { enabled = false },
-								pylsp_isort = { enabled = false },
+						pyright = {
+							disableOrganizeImports = true, -- Using Ruff
+						},
+						python = {
+							analysis = {
+								ignore = { "*" }, -- Using Ruff
+								typeCheckingMode = "off", -- Using mypy
 							},
 						},
 					},
 				},
+				-- pylsp = {
+				-- 	settings = {
+				-- 		pylsp = {
+				-- 			plugins = {
+				-- 				pyflakes = { enabled = false },
+				-- 				pycodestyle = { enabled = false },
+				-- 				autopep8 = { enabled = false },
+				-- 				yapf = { enabled = false },
+				-- 				mccabe = { enabled = false },
+				-- 				pylsp_mypy = { enabled = false },
+				-- 				pylsp_black = { enabled = false },
+				-- 				pylsp_isort = { enabled = false },
+				-- 			},
+				-- 		},
+				-- 	},
+				-- },
 				rust_analyzer = {
 					diagnostics = {
 						refreshSupport = false,
