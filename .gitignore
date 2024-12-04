@@ -7,6 +7,8 @@
 !.config/kitty
 !.config/ohmyposh
 !.config/awesome
+!.config/sway
 !.tmux.conf
+
 
 .config/hypr/laptop.conf
