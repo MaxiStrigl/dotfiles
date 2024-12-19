@@ -17,12 +17,12 @@ require("lazy").setup({
 	require("plugins.lualine"),
 	require("plugins.treesitter"),
 	require("plugins.telescope"),
+	require("plugins.misc"),
 	require("plugins.lsp"),
 	require("plugins.completion"),
 	require("plugins.formatting"),
 	require("plugins.gitsigns"),
 	require("plugins.lazygit"),
-	require("plugins.misc"),
 	require("plugins.debugging"),
 	require("plugins.trouble"),
 })
