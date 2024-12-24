@@ -25,9 +25,9 @@ vim.keymap.set("n", "<Left>", ":vertical resize +2<CR>", opts)
 vim.keymap.set("n", "<Right>", ":vertical resize -2<CR>", opts)
 
 -- Manage Splits
-vim.keymap.set("n", "<leader>v", "<C-w>v", opts)       -- Split vertical
-vim.keymap.set("n", "<leader>h", "<C-w>s", opts)       -- Split horizontal
-vim.keymap.set("n", "<leader>se", "<C-w>=", opts)      -- Make splits equal size
+vim.keymap.set("n", "<leader>v", "<C-w>v", opts) -- Split vertical
+vim.keymap.set("n", "<leader>h", "<C-w>s", opts) -- Split horizontal
+vim.keymap.set("n", "<leader>se", "<C-w>=", opts) -- Make splits equal size
 vim.keymap.set("n", "<leader>xs", "<:close<CR>", opts) -- Close split
 
 -- Toggle line wrapping
@@ -39,3 +39,6 @@ vim.keymap.set("v", ">", ">gv", opts)
 
 -- Keep last yanked when pasting over text
 vim.keymap.set("v", "p", '"_dP', opts)
+
+-- Update config without by sourcing current file
+vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>")
